@@ -1,10 +1,8 @@
-import logo from "./images/logo.svg";
+import React from "react";
 
-import "./styles/normalize.css";
-import "./styles/fontawesome.min.css";
-import "./styles/main.css";
+import logo from "../../images/logo.svg";
 
-function App() {
+export default function Home() {
   return (
     <div className="home-screen">
       <div className="home-screen__logo">
@@ -19,5 +17,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
