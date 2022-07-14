@@ -2,12 +2,19 @@ import React from "react";
 
 import { UserListItem } from ".";
 
-export default function UserlListWrapper() {
+export default function UserlListWrapper(props) {
   return (
     <div className="blogs-screen__list">
-      <UserListItem id="1" src="" name="Cássio Lacerda" />
-      <UserListItem id="2" src="" name="César Lacerda" />
-      <UserListItem id="3" src="" name="Aura Lacerda" />
+      {props.users
+        .sort((a, b) => a.fn.localeCompare(b.fn))
+        .map((user) => (
+          <UserListItem
+            key={user.id}
+            id={user.id}
+            src={user.avatar}
+            name={`${user.fn} ${user.ln}`}
+          />
+        ))}
     </div>
   );
 }

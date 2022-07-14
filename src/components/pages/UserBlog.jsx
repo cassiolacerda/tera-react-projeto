@@ -1,75 +1,39 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
-import logo from "../../images/logo.svg";
-import user1 from "../../images/placeholders/user-1.jpg";
-import post1 from "../../images/placeholders/post-1.jpg";
-import post2 from "../../images/placeholders/post-2.jpg";
-import post3 from "../../images/placeholders/post-3.jpg";
+import { Default } from "../templates";
+import { UserBio, PostListWrapper } from "../molecules";
 
 export default function UserBlog() {
+  const { userId } = useParams();
+
+  const [posts, setPosts] = React.useState([]);
+  const [user, setUser] = React.useState({
+    avatar: "",
+    bio: "",
+    fn: "",
+    ln: "",
+  });
+
+  React.useEffect(() => {
+    fetch(`https://62c4e487abea8c085a7e022a.mockapi.io/users/${userId}/posts`)
+      .then((response) => response.json())
+      .then((data) => {
+        setUser(data[0].userData);
+        setPosts(data);
+      });
+  }, []);
+
   return (
-    <div className="wrapper">
-      <div className="app-header">
-        <div className="app-header__logo">
-          <img src={logo} className="responsive" alt="" />
-        </div>
-        <div className="app-header__menu">
-          <i className="fa fa-bars"></i>
-        </div>
-      </div>
-
+    <Default>
       <div className="user-blog-screen">
-        <div className="user-blog-screen__header">
-          <div className="user-blog-screen__header-photo">
-            <img src={user1} className="responsive avatar" alt="" />
-          </div>
-          <h1 className="user-blog-screen__header-title">Chris Hudson</h1>
-          <p className="user-blog-screen__header-bio">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </p>
-        </div>
-
-        <div className="user-blog-screen__posts">
-          <a href="#" className="user-blog-screen__posts-item">
-            <div className="user-blog-screen__posts-item-photo">
-              <img src={post1} className="responsive" alt="" />
-            </div>
-            <h2 className="user-blog-screen__posts-item-title">
-              Usando React como SPA
-            </h2>
-            <div className="user-blog-screen__posts-date">
-              Publicado em 14/06/2022
-            </div>
-          </a>
-          <a href="#" className="user-blog-screen__posts-item">
-            <div className="user-blog-screen__posts-item-photo">
-              <img src={post2} className="responsive" alt="" />
-            </div>
-            <h2 className="user-blog-screen__posts-item-title">
-              Você conhece o JSX?
-            </h2>
-            <div className="user-blog-screen__posts-date">
-              Publicado em 14/06/2022
-            </div>
-          </a>
-          <a href="#" className="user-blog-screen__posts-item">
-            <div className="user-blog-screen__posts-item-photo">
-              <img src={post3} className="responsive" alt="" />
-            </div>
-            <h2 className="user-blog-screen__posts-item-title">
-              SSG, SPA e SSR: Qual usar?
-            </h2>
-            <div className="user-blog-screen__posts-date">
-              Publicado em 14/06/2022
-            </div>
-          </a>
-        </div>
+        <UserBio
+          avatar={user.avatar}
+          bio={user.bio}
+          name={`${user.fn} ${user.ln}`}
+        />
+        <PostListWrapper posts={posts} />
       </div>
-
-      <div className="app-footer">Módulo React :: Full Stack Development</div>
-    </div>
+    </Default>
   );
 }
