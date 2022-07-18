@@ -2,15 +2,19 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 import logo from "../../images/logo.svg";
+import { AppLoading } from "../organisms";
 
 export default function UserPostForm() {
   const { userId } = useParams();
 
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleForm = (e) => {
     e.preventDefault();
+
+    setIsLoading(true);
 
     fetch(`https://62c4e487abea8c085a7e022a.mockapi.io/users/${userId}/posts`, {
       method: "POST",
@@ -21,10 +25,13 @@ export default function UserPostForm() {
     }).then(() => {
       setTitle("");
       setContent("");
+      setIsLoading(false);
     });
   };
 
-  return (
+  return isLoading ? (
+    <AppLoading />
+  ) : (
     <div className="wrapper">
       <div className="app-header">
         <div className="app-header__logo">

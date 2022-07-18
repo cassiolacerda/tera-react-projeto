@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { Avatar } from "../atoms";
 import { Default } from "../templates";
+import { AppLoading } from "../organisms";
 
 export default function UserPost() {
   const { userId, postId } = useParams();
@@ -22,7 +23,7 @@ export default function UserPost() {
   }, []);
 
   return isLoading ? (
-    <h1>Loading...</h1>
+    <AppLoading />
   ) : (
     <Default>
       <div className="user-post-screen">

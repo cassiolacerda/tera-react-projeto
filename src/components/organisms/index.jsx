@@ -1,4 +1,5 @@
 import AppHeader from "./AppHeader";
 import AppFooter from "./AppFooter";
+import AppLoading from "./AppLoading";
 
-export { AppHeader, AppFooter };
+export { AppHeader, AppFooter, AppLoading };
