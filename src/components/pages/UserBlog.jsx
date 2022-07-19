@@ -20,7 +20,7 @@ export default function UserBlog() {
         setPosts(data);
         setIsLoading(false);
       });
-  }, []);
+  }, [userId]);
 
   return isLoading ? (
     <AppLoading />

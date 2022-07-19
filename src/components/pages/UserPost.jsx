@@ -20,7 +20,7 @@ export default function UserPost() {
         setPost(data);
         setIsLoading(false);
       });
-  }, []);
+  }, [postId, userId]);
 
   return isLoading ? (
     <AppLoading />
