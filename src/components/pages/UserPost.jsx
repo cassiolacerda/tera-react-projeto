@@ -32,8 +32,8 @@ export default function UserPost() {
         </div>
         <h2 className="user-post-screen__post-title">{post.title}</h2>
         <div className="user-post-screen__post-date">
-          Publicado em {post.createdAt} por
-          <Avatar />
+          Publicado em {post.createdAt} por{" "}
+          <Avatar src={post.userData.avatar} />
           <strong> {`${post.userData.fn} ${post.userData.ln}`}</strong>
         </div>
         <div className="user-post-screen__post-content">{post.content}</div>
