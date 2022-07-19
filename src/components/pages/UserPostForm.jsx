@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import logo from "../../images/logo.svg";
 import { AppLoading } from "../organisms";
+import { Default } from "../templates";
 
 export default function UserPostForm() {
   const { userId } = useParams();
@@ -32,16 +32,7 @@ export default function UserPostForm() {
   return isLoading ? (
     <AppLoading />
   ) : (
-    <div className="wrapper">
-      <div className="app-header">
-        <div className="app-header__logo">
-          <img src={logo} className="responsive" alt="" />
-        </div>
-        <div className="app-header__menu">
-          <i className="fa fa-bars"></i>
-        </div>
-      </div>
-
+    <Default>
       <div className="create-post-screen">
         <h1>Criar</h1>
 
@@ -70,8 +61,6 @@ export default function UserPostForm() {
           </button>
         </form>
       </div>
-
-      <div className="app-footer">Módulo React :: Full Stack Development</div>
-    </div>
+    </Default>
   );
 }
